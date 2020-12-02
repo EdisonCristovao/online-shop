@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:onlineshop/constants.dart';
 import 'package:onlineshop/models/Product.dart';
+import 'package:onlineshop/pages/details/details_page.dart';
 import 'package:onlineshop/pages/home/components/categories.dart';
+import 'package:onlineshop/pages/home/components/item_card.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -12,7 +14,7 @@ class Body extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
           child: Text(
-            'Women',
+            'Mulheres',
             style: Theme.of(context)
                 .textTheme
                 .headline5
@@ -33,53 +35,17 @@ class Body extends StatelessWidget {
               ),
               itemBuilder: (context, index) => ItemCard(
                 product: products[index],
-                press: () {},
+                press: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailsPage(
+                      product: products[index],
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
-        )
-      ],
-    );
-  }
-}
-
-class ItemCard extends StatelessWidget {
-  final Product product;
-  final Function press;
-
-  const ItemCard({
-    Key key,
-    this.product,
-    this.press,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.all(kDefaultPaddin),
-            // height: 180,
-            // width: 160,
-            decoration: BoxDecoration(
-              color: product.color,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Image.asset(product.image),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin / 4),
-          child: Text(
-            product.title,
-            style: TextStyle(color: kTextLightColor),
-          ),
-        ),
-        Text(
-          "\$${product.price}",
-          style: TextStyle(fontWeight: FontWeight.bold),
         )
       ],
     );
