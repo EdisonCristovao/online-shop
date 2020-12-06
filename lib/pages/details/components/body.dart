@@ -42,19 +42,23 @@ class Body extends StatelessWidget {
                                 children: [
                                   ColorDot(
                                     color: Color(0xFF356C95),
+                                    isSelected: true,
                                   ),
-                                  ColorDot(
-                                    color: Color(0xFF356C95),
-                                  ),
-                                  ColorDot(
-                                    color: Color(0xFF356C95),
-                                  )
+                                  ColorDot(color: Color(0xFFF8C078)),
+                                  ColorDot(color: Color(0xFFA29B9B))
                                 ],
                               )
                             ],
-                          )
+                          ),
+                          RichText(
+                              text: TextSpan(
+                            style: TextStyle(color: kTextColor),
+                            children: [
+                              TextSpan(text: 'Size'),
+                            ],
+                          ))
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -118,9 +122,11 @@ class Body extends StatelessWidget {
 
 class ColorDot extends StatelessWidget {
   final Color color;
+  final bool isSelected;
   const ColorDot({
     Key key,
     this.color,
+    this.isSelected = false,
   }) : super(key: key);
 
   @override
@@ -135,7 +141,7 @@ class ColorDot extends StatelessWidget {
       width: 24,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: color),
+        border: Border.all(color: isSelected ? color : Colors.transparent),
       ),
       child: DecoratedBox(
         decoration: BoxDecoration(color: color, shape: BoxShape.circle),
